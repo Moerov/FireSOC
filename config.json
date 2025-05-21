@@ -1,0 +1,12 @@
+{
+  "log_path": "C:\\FireSOC\\FireSOC_log.txt",
+  "csv_path": "C:\\FireSOC\\tests.csv",
+  "test_params": [
+"t1018_start_host": "1",
+  "t1018_stop_host": "254",
+  "t1018_subnet": "192.168.1",
+  "t1041_destination_url": "click-boom.site",
+  "t1048.003_ip_address": "http://127.0.0.1"
+]
+}
+
