@@ -41,4 +41,21 @@ No real data was encrypted.
     }
 }
 
+# Simulated ransom note creation (non-malicious)
+$notePath = "$env:USERPROFILE\Desktop\RANSOM_NOTE_SIMULATION.txt"
+
+@"
+*** THIS IS A SIMULATED RANSOMWARE EVENT ***
+Your files in this test have been selected and mocked for encryption.
+This activity is part of a SOC assessment or red team simulation.
+
+No files have been harmed or encrypted.
+No data has been leaked or accessed.
+
+What you are seeing is a security test designed to validate detection and response procedures.
+
+If you are seeing this file, it means the simulated ransomware activity was successful.
+
+"@ | Out-File -Encoding UTF8 -FilePath $notePath
+
 Write-Host "`nSimulation completed. Files copied to: $destRoot" -ForegroundColor Green
