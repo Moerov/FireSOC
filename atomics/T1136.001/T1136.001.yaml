@@ -170,7 +170,7 @@ atomic_tests:
   executor:
     command: |
       net user /add "#{username}" "#{password}"
-      net localgroup administrators "#{username}" /add
+      net localgroup administratoren "#{username}" /add
     cleanup_command: |
       net user /del "#{username}" >nul 2>&1
     name: command_prompt
