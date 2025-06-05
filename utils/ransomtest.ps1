@@ -1,7 +1,7 @@
 # Ransomware Simulation Script - Safe for SOC Testing
 
 # Target extensions to simulate ransomware impact
-$extensions = @("*.doc", "*.png", "*.xlsx", "*.docx", "*.md")
+$extensions = @("*.txt", "*.doc", "*.png", "*.xlsx", "*.docx", "*.md")
 
 # Destination folder for simulation
 $destRoot = "C:\RansomwareTest"
