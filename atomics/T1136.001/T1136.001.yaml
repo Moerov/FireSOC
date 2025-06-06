@@ -163,13 +163,13 @@ atomic_tests:
       description: Username of the user to create
       type: string
       default: T1136.001_Admin
-    password:
+    password_local:
       description: Password of the user to create
       type: string
       default: T1136_pass
   executor:
     command: |
-      net user /add "#{username}" "#{password}"
+      net user /add "#{username}" "#{password_local}"
       net localgroup administratoren "#{username}" /add
     cleanup_command: |
       net user /del "#{username}" >nul 2>&1
