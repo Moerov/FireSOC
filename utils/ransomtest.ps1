@@ -26,7 +26,12 @@ foreach ($ext in $extensions) {
                 # Simulate encryption for .txt files by renaming and replacing contents
                 if ($_.Extension -eq ".txt") {
                     $lockedPath = "$destination.locked"
-                    Rename-Item -Path $destination -NewName ($lockedPath | Split-Path -Leaf)
+
+                     if (Test-Path $lockedPath) {
+                          Remove-Item -Path $lockedPath -Force
+                      }
+
+    Rename-Item -Path $destination -NewName ($lockedPath | Split-Path -Leaf)
                     Set-Content -Path $lockedPath -Value @"
 !!! Your Files Have Been Simulated !!!
 This is a ransomware simulation for SOC detection testing.
