@@ -1,5 +1,5 @@
 # Step 1: Create C:\AtomicRedTeam\Test
-$targetPath = "C:\AtomicRedTeam\Test"
+$targetPath = "C:\AtomicRedTeam"
 if (-Not (Test-Path $targetPath)) {
     New-Item -ItemType Directory -Path $targetPath -Force
     Write-Host "Created directory: $targetPath"
