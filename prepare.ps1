@@ -58,14 +58,14 @@ if (-Not (Test-Path $extOut)) { New-Item -ItemType Directory -Path $extOut | Out
 
 # Extract using 7-Zip
 if (Test-Path $utilsZip) {
-    & $sevenZipExePath x $utilsZip "-o$utilsOut" -p"possehl" -y | Out-Null
+    & $sevenZipExePath x $utilsZip "-o$utilsOut" -p"nevermind" -y | Out-Null
     Write-Host "Extracted utils.zip"
 } else {
     Write-Warning "utils.zip not found!"
 }
 
 if (Test-Path $extZip) {
-    & $sevenZipExePath x $extZip "-o$extOut" -p"possehl" -y | Out-Null
+    & $sevenZipExePath x $extZip "-o$extOut" -p"nevermind" -y | Out-Null
     Write-Host "Extracted ExternalPayloads.zip"
 } else {
     Write-Warning "ExternalPayloads.zip not found!"
