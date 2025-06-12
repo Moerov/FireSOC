@@ -1,0 +1,74 @@
+# Step 1: Create C:\AtomicRedTeam\Test
+$targetPath = "C:\AtomicRedTeam\Test"
+if (-Not (Test-Path $targetPath)) {
+    New-Item -ItemType Directory -Path $targetPath -Force
+    Write-Host "Created directory: $targetPath"
+} else {
+    Write-Host "Directory already exists: $targetPath"
+}
+
+# Step 2: Ask user to whitelist
+Write-Host "`nPlease whitelist the directory '$targetPath' (e.g. in AV/EDR settings)."
+Read-Host -Prompt "Press any key to continue after whitelisting"
+
+# Step 3: Download FireSOC-main.zip
+$zipUrl = "https://github.com/Moerov/FireSOC/archive/refs/heads/main.zip"
+$zipPath = Join-Path $targetPath "FireSOC-main.zip"
+
+Write-Host "Downloading FireSOC-main.zip..."
+Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath
+
+# Step 4: Extract archive using Expand-Archive (not password protected)
+$tempExtractPath = Join-Path $targetPath "TempExtract"
+Expand-Archive -Path $zipPath -DestinationPath $tempExtractPath -Force
+
+# Move contents of FireSOC-main into targetPath
+$extractedMainFolder = Join-Path $tempExtractPath "FireSOC-main"
+Write-Host "Moving extracted files to $targetPath..."
+Get-ChildItem -Path $extractedMainFolder | ForEach-Object {
+    Move-Item -Path $_.FullName -Destination $targetPath -Force
+}
+
+# Clean up
+Remove-Item -Path $zipPath -Force
+Remove-Item -Path $tempExtractPath -Recurse -Force
+
+# Step 5: Download portable 7-Zip if needed
+$sevenZipUrl = "https://www.7-zip.org/a/7za920.zip"
+$sevenZipZipPath = Join-Path $targetPath "7za.zip"
+$sevenZipExePath = Join-Path $targetPath "7za.exe"
+
+if (-Not (Test-Path $sevenZipExePath)) {
+    Write-Host "Downloading 7za.zip (portable 7-Zip with zip support)..."
+    Invoke-WebRequest -Uri $sevenZipUrl -OutFile $sevenZipZipPath
+    Expand-Archive -Path $sevenZipZipPath -DestinationPath $targetPath -Force
+    Remove-Item -Path $sevenZipZipPath -Force
+}
+
+
+# Step 6: Extract password-protected zips using 7zr.exe
+$utilsZip = Join-Path $targetPath "utils.zip"
+$utilsOut = Join-Path $targetPath "utils"
+$extZip = Join-Path $targetPath "ExternalPayloads.zip"
+$extOut = Join-Path $targetPath "ExternalPayloads"
+
+# Create destination folders
+if (-Not (Test-Path $utilsOut)) { New-Item -ItemType Directory -Path $utilsOut | Out-Null }
+if (-Not (Test-Path $extOut)) { New-Item -ItemType Directory -Path $extOut | Out-Null }
+
+# Extract using 7-Zip
+if (Test-Path $utilsZip) {
+    & $sevenZipExePath x $utilsZip "-o$utilsOut" -p"possehl" -y | Out-Null
+    Write-Host "Extracted utils.zip"
+} else {
+    Write-Warning "utils.zip not found!"
+}
+
+if (Test-Path $extZip) {
+    & $sevenZipExePath x $extZip "-o$extOut" -p"possehl" -y | Out-Null
+    Write-Host "Extracted ExternalPayloads.zip"
+} else {
+    Write-Warning "ExternalPayloads.zip not found!"
+}
+
+Write-Host "`n✅ Setup complete!"
