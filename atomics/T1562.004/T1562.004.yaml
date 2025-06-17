@@ -544,3 +544,14 @@ atomic_tests:
       echo "" | "#{plink_file}" -batch "#{vm_host}" -ssh -l #{vm_user} -pw "#{vm_pass}" "esxcli network firewall set --default-action false"
     name: command_prompt
     elevation_required: false
+- name: Allow RDP on Microsoft Defender Firewall (custom command)
+  auto_generated_guid: d9841bf8-f161-4c73-81e9-fd773a5ff8c1
+  description: |
+    Enables Remote Desktop through the Windows Defender Firewall.
+    Caution if you access remotely the host where the test runs! Especially with the cleanup command which will reset the firewall and risk disabling those services...
+  supported_platforms:
+  - windows
+  executor:
+    command: |
+      netsh advfirewall firewall add rule name="Allow RDP" dir=in action=allow protocol=TCP localport=3389
+    name: command_prompt
