@@ -13,6 +13,9 @@
    "host_to_scan": "10.10.14.1",
    "password_local": "change_me",
    "user_limit": 10,
-   "password_spray": "Sommer2025!" 
+   "password_spray": "Sommer2025!",
+   "mega_user_account": "change@me",
+   "mega_user_password": "to_change",
+   "remote_share": ""
 }
 }
