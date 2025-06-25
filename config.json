@@ -3,6 +3,7 @@
   "debug_log_path": "C:\\AtomicRedTeam\\FireSOC_debuglog.txt",
   "csv_path": "C:\\AtomicRedTeam\\tests.csv",
   "test_params": {
+   "pwshurl": "https://click-boom.site/FJMqLmDE/Rechnung.pdf",
    "mimurl": "https://raw.githubusercontent.com/Moerov/FireSOC/refs/heads/main/utils/Invoke-Mimikatz.ps1",
    "start_host": "1",
    "stop_host": "254",

