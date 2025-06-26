@@ -1,5 +1,5 @@
 # ─── CONFIGURATION ──────────────────────────────────────────────────────────────
-$useProxy = $true # Change if needed
+$useProxy = $false # Change if needed
 $proxyUrl = "http://proxy.company.local:8080"  # Change if needed
 
 if ($useProxy) {
@@ -90,6 +90,5 @@ foreach ($file in $filesToDelete) {
         Write-Host "Not found: $fullPath"
     }
 }
-
 
 Write-Host "`n✅ Setup complete!"
