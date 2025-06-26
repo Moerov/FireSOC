@@ -78,5 +78,18 @@ if (Test-Path $extZip) {
 } else {
     Write-Warning "ExternalPayloads.zip not found!"
 }
+# ─── STEP 7: Cleanup ──────────────────────────────────────────────────────────────
+$filesToDelete = @("readme.txt", "license.txt", "7-zip.chm", "7za.exe")
+
+foreach ($file in $filesToDelete) {
+    $fullPath = Join-Path $targetPath $file
+    if (Test-Path $fullPath) {
+        Remove-Item $fullPath -Force
+        Write-Host "Deleted: $fullPath"
+    } else {
+        Write-Host "Not found: $fullPath"
+    }
+}
+
 
 Write-Host "`n✅ Setup complete!"
