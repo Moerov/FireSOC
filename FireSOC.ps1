@@ -3,6 +3,28 @@ param (
     [switch]$CheckPrereqs
 )
 
+# --- Proxy Configuration ---
+$useProxy = $true  # Set to $false if no proxy is needed
+$proxyUrl = "http://proxy.yourcompany.local:8080"  # Change to your proxy URL
+
+if ($useProxy) {
+    Write-Host "[*] Proxy is enabled: $proxyUrl"
+    # Set environment variables so all subprocesses and Invoke-WebRequest pick it up
+    [System.Environment]::SetEnvironmentVariable("HTTP_PROXY", $proxyUrl, "Process")
+    [System.Environment]::SetEnvironmentVariable("HTTPS_PROXY", $proxyUrl, "Process")
+    
+    # Set system WinHTTP proxy for system-wide usage
+    netsh winhttp set proxy $proxyUrl | Out-Null
+} else {
+    Write-Host "[*] Proxy is disabled"
+}
+
+# Parameters for web requests inside this script
+$webParams = @{}
+if ($useProxy) {
+    $webParams["Proxy"] = $proxyUrl
+}
+
 # Ensure script stops on error
 $ErrorActionPreference = "Stop"
 
