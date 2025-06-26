@@ -3,13 +3,13 @@ $useProxy = $true # Change if needed
 $proxyUrl = "http://proxy.company.local:8080"  # Change if needed
 
 if ($useProxy) {
-    $proxy = New-Object System.Net.WebProxy($proxyUrl, $true)
-    [System.Net.WebRequest]::DefaultWebProxy = $proxy
-    $webParams = @{ Proxy = $proxy }
     Write-Host "[*] Proxy is set to $proxyUrl"
+    $env:HTTP_PROXY = $proxyUrl
+    $env:HTTPS_PROXY = $proxyUrl
 } else {
-    $webParams = @{}
     Write-Host "[*] No proxy used."
+    Remove-Item Env:\HTTP_PROXY -ErrorAction SilentlyContinue
+    Remove-Item Env:\HTTPS_PROXY -ErrorAction SilentlyContinue
 }
 
 # ─── STEP 1: Create Working Directory ───────────────────────────────────────────
@@ -29,7 +29,7 @@ Read-Host -Prompt "Press any key to continue after whitelisting"
 $zipUrl = "https://github.com/Moerov/FireSOC/archive/refs/heads/main.zip"
 $zipPath = Join-Path $targetPath "FireSOC-main.zip"
 Write-Host "Downloading FireSOC-main.zip..."
-Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath @webParams
+curl.exe -L $zipUrl -o $zipPath
 
 # ─── STEP 4: Extract FireSOC ────────────────────────────────────────────────────
 $tempExtractPath = Join-Path $targetPath "TempExtract"
@@ -51,7 +51,7 @@ $sevenZipExePath = Join-Path $targetPath "7za.exe"
 
 if (-Not (Test-Path $sevenZipExePath)) {
     Write-Host "Downloading 7za.zip..."
-    Invoke-WebRequest -Uri $sevenZipUrl -OutFile $sevenZipZipPath @webParams
+    curl.exe -L $sevenZipUrl -o $sevenZipZipPath
     Expand-Archive -Path $sevenZipZipPath -DestinationPath $targetPath -Force
     Remove-Item -Path $sevenZipZipPath -Force
 }
