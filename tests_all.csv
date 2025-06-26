@@ -29,4 +29,8 @@ OS Credential Dumping: DCSync,T1003.006,"1",0,5,NA
 Exfiltration Over Command and Control Channel,T1041,"1,2",0,5,NA
 Exfiltration Over Alternative Protocol: Exfiltration Over Unencrypted/Obfuscated Non-C2 Protocol,T1048.003,"4",1,5,NA
 Data Encrypted for Impact,T1486,"8,9",0,5,NA
-
+Brute Force: Password Spraying,T1110.003,"6",0,5,NA
+Disable Microsoft Defender Firewall,T1562.004,"1",1,5,NA
+Account Discovery: Domain Account,T1087.002,"16",0,5,NA
+Exfiltration Over Web Service: Exfiltration to Cloud Storage,T1567.002,"1",0,5,NA
+Impair Defenses: Disable or Modify Tools,T1562.001,"58",1,5,NA
