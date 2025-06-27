@@ -104,7 +104,7 @@ foreach ($test in $tests) {
         }
         Log-Message "Atomic $technique - Test $testNumber finished successfully."
     } catch {
-        Log-Message "ERROR during $technique Test $testNumber: $_"
+        Log-Message "ERROR during $technique Test ${testNumber}: $_"
     }
 
     $endTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss"

