@@ -34,3 +34,4 @@ Account Discovery: Domain Account,T1087.002,16,0,5,NA
 Exfiltration Over Web Service: Exfiltration to Cloud Storage,T1567.002,1,0,5,NA
 Impair Defenses: Disable or Modify Tools,T1562.001,16,1,5,NA
 Impair Defenses: Disable or Modify Tools,T1562.001,18,1,5,NA
+Command and Scripting Interpreter: PowerShell over DNS,24,0,5,NA

