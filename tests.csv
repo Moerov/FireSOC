@@ -26,7 +26,7 @@ Unsecured Credentials: Credentials In Files,T1552.001,4,0,5,NA
 OS Credential Dumping: LSASS Memory,T1003.001,1,1,5,NA
 Remote Services: Windows Remote Management,T1021.006,1,1,5,NA
 Use Alternate Authentication Material: Pass the Hash,T1550.002,1,0,5,NA
-OS Credential Dumping: DCSync,T1003.006,"1",0,5,NA
+OS Credential Dumping: DCSync,T1003.006,1,0,5,NA
 Exfiltration Over Command and Control Channel,T1041,1,0,5,NA
 Data Encrypted for Impact,T1486,11,0,5,NA
 Brute Force: Password Spraying,T1110.003,6,0,5,NA
