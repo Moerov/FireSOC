@@ -4,7 +4,7 @@ param (
 )
 
 # --- Proxy Configuration ---
-$useProxy = $true  # Set to $false if no proxy is needed
+$useProxy = $false  # Set to $false if no proxy is needed
 $proxyUrl = "http://proxy.yourcompany.local:8080"  # Change to your proxy URL
 
 if ($useProxy) {
@@ -75,7 +75,6 @@ foreach ($key in $configData.test_params.PSObject.Properties.Name) {
 
 # --- 5. Process Test CSV ---
 $tests = Import-Csv $csvPath
-Invoke-AtomicTest T1204.002  -TestNumbers 8
 
 foreach ($test in $tests) {
     $technique = $test.Technique

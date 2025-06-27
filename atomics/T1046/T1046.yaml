@@ -306,3 +306,26 @@ atomic_tests:
       nmap -Pn -sV -p #{port_range} #{host}
     elevation_required: true
     name: sh
+- name: Port Scan NMap (Portable Version)
+  auto_generated_guid: 9f3c4763-5612-4a75-9c42-3f1e61f5e25e
+  description: Scan ports using the portable NMap located in the utils folder.
+  supported_platforms:
+    - windows
+  input_arguments:
+    host_to_scan_portable:
+      description: The host to scan using portable NMap
+      type: string
+      default: 127.0.0.1
+  dependency_executor_name: powershell
+  dependencies:
+    - description: |
+        Portable NMap must exist at PathToAtomicsFolder\..\utils\nmap-*\nmap.exe
+      prereq_command: |
+        if (Get-ChildItem -Path "PathToAtomicsFolder\..\utils\nmap-*\nmap.exe" -ErrorAction SilentlyContinue) { exit 0 } else { exit 1 }
+      get_prereq_command: |
+  executor:
+    name: powershell
+    elevation_required: false
+    command: |
+      $nmapPath = Get-ChildItem -Path "PathToAtomicsFolder\..\utils\nmap-*\nmap.exe" -ErrorAction Stop | Select-Object -First 1
+      & $nmapPath.FullName -Pn -sT #{host_to_scan_portable}
