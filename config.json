@@ -3,21 +3,21 @@
   "debug_log_path": "C:\\AtomicRedTeam\\FireSOC_debuglog.txt",
   "csv_path": "C:\\AtomicRedTeam\\tests.csv",
   "test_params": {
-   "pwshurl": "https://click-boom.site/FJMqLmDE/Rechnung.pdf",
-   "mimurl": "https://raw.githubusercontent.com/Moerov/FireSOC/refs/heads/main/utils/Invoke-Mimikatz.ps1",
-   "start_host": "1",
-   "stop_host": "254",
-   "subnet": "change_me",
-   "destination_url": "click-boom.site:4242",
-   "ip_address": "http://127.0.0.1",
-   "pua_url": "https://raw.githubusercontent.com/Moerov/FireSOC/main/utils/edge_update.exe",
-   "host_to_scan_portable": "change_me",
-   "password_local": "change_me",
-   "user_limit": 10,
-   "password_spray": "Sommer2025!",
-   "Domain": "to_change",
-   "DomainController": "to_change",
-   "mega_user_account": "change@me",
-   "mega_user_password": "to_change"
-}
+    "pwshurl": "https://click-boom.site/FJMqLmDE/Rechnung.pdf",
+    "mimurl": "https://raw.githubusercontent.com/Moerov/FireSOC/refs/heads/main/utils/Invoke-Mimikatz.ps1",
+    "start_host": "1",
+    "stop_host": "254",
+    "subnet": "change_me",
+    "destination_url": "click-boom.site:4242",
+    "ip_address": "http://127.0.0.1",
+    "pua_url": "https://raw.githubusercontent.com/Moerov/FireSOC/main/utils/edge_update.exe",
+    "host_to_scan_portable": "change_me",
+    "password_local": "change_me",
+    "user_limit": 10,
+    "password_spray": "Sommer2025!",
+    "Domain": "to_change",
+    "DomainController": "to_change",
+    "mega_user_account": "change@me",
+    "mega_user_password": "to_change"
+  }
 }
