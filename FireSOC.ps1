@@ -4,32 +4,26 @@ param (
 )
 
 # --- Proxy Configuration ---
-$useProxy = $false  # Set to $false if no proxy is needed
-$proxyUrl = "http://proxy.yourcompany.local:8080"  # Change to your proxy URL
+$useProxy = $false
+$proxyUrl = "http://proxy.yourcompany.local:8080"
 
 if ($useProxy) {
     Write-Host "[*] Proxy is enabled: $proxyUrl"
-    # Set environment variables so all subprocesses and Invoke-WebRequest pick it up
     [System.Environment]::SetEnvironmentVariable("HTTP_PROXY", $proxyUrl, "Process")
     [System.Environment]::SetEnvironmentVariable("HTTPS_PROXY", $proxyUrl, "Process")
-    
-    # Set system WinHTTP proxy for system-wide usage
     netsh winhttp set proxy $proxyUrl | Out-Null
 } else {
     Write-Host "[*] Proxy is disabled"
 }
 
-# Parameters for web requests inside this script
 $webParams = @{}
 if ($useProxy) {
     $webParams["Proxy"] = $proxyUrl
 }
 
-# Ensure script stops on error
 $ErrorActionPreference = "Stop"
 
 # --- Helper Functions ---
-
 function Is-Admin {
     return ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 }
@@ -73,36 +67,52 @@ foreach ($key in $configData.test_params.PSObject.Properties.Name) {
     $myArgs[$key] = $configData.test_params.$key
 }
 
+### CSV LOGGING: Prepare result CSV
+$scriptStartTime = Get-Date
+$timestamp = $scriptStartTime.ToString("yyyy-MM-dd_HH-mm-ss")
+$resultsCsvPath = "C:\AtomicRedTeam\${timestamp}_results.csv"
+"Description,Technique,TestNumber,Admin,StartTime,EndTime,Command,Result" | Out-File -FilePath $resultsCsvPath -Encoding UTF8
+
 # --- 5. Process Test CSV ---
 $tests = Import-Csv $csvPath
 
 foreach ($test in $tests) {
     $technique = $test.Technique
-    $testNumbers = $test.TestNumbers -split ',' | ForEach-Object { $_.Trim() }
+    $testNumber = $test.TestNumbers.Trim()
     $requiresAdmin = ($test.Admin -eq "1")
     $sleepSeconds = [int]$test.Sleep
     $desc = $test.Description
 
-    Log-Message "Atomic $technique - Test(s) $testNumbers started: $desc"
+    Log-Message "Atomic $technique - Test $testNumber started: $desc"
 
     if ($requiresAdmin -and -not $IsAdmin) {
         Log-Message "Skipped $technique - Admin required but not available."
         continue
     }
 
+    $startTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $command = "Invoke-AtomicTest $technique -TestNumbers $testNumber -InputArgs `$myArgs"
+
     try {
         if ($CheckPrereqs) {
-            Write-Host "`nChecking prerequisites for $technique (Test $testNumbers)..." -ForegroundColor Yellow
-            Invoke-AtomicTest $technique -TestNumbers $testNumbers -CheckPrereqs
+            Write-Host "`nChecking prerequisites for $technique (Test $testNumber)..." -ForegroundColor Yellow
+            Invoke-AtomicTest $technique -TestNumbers $testNumber -CheckPrereqs
         } else {
-            Invoke-AtomicTest $technique -TestNumbers $testNumbers -GetPrereq
-            Invoke-AtomicTest $technique -TestNumbers $testNumbers -InputArgs $myArgs *>&1 | Out-File -FilePath $debugLogPath -Append
-            Invoke-AtomicTest $technique -TestNumbers $testNumbers -Cleanup
+            Invoke-AtomicTest $technique -TestNumbers $testNumber -GetPrereq
+            Invoke-AtomicTest $technique -TestNumbers $testNumber -InputArgs $myArgs *>&1 | Out-File -FilePath $debugLogPath -Append
+            Invoke-AtomicTest $technique -TestNumbers $testNumber -Cleanup
         }
-        Log-Message "Atomic $technique - Test(s) $testNumbers finished successfully."
+        Log-Message "Atomic $technique - Test $testNumber finished successfully."
     } catch {
-        Log-Message "ERROR during $technique Test ${testNumbers}: $_"
+        Log-Message "ERROR during $technique Test $testNumber: $_"
     }
+
+    $endTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+
+    ### CSV LOGGING: Append result
+    $line = '"{0}","{1}","{2}","{3}","{4}","{5}","{6}","{7}"' -f `
+        $desc, $technique, $testNumber, $requiresAdmin, $startTime, $endTime, $command, "TBD"
+    Add-Content -Path $resultsCsvPath -Value $line
 
     Start-Sleep -Seconds $sleepSeconds
 }
