@@ -9,7 +9,6 @@
     "stop_host": "254",
     "subnet": "change_me",
     "destination_url": "click-boom.site:4242",
-    "ip_address": "http://127.0.0.1",
     "pua_url": "https://raw.githubusercontent.com/Moerov/FireSOC/main/utils/edge_update.exe",
     "host_to_scan_portable": "change_me",
     "password_local": "change_me",
