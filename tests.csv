@@ -14,17 +14,17 @@ System Owner/User Discovery,T1033,1,0,5,NA
 Network Service Discovery,T1046,13,0,5,NA
 Remote System Discovery,T1018,4,0,5,NA
 Network Share Discovery,T1135,8,0,5,NA
-Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder,T1547.001,1,1,5,NA
-Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder,T1547.001,3,1,5,NA
-Scheduled Task/Job: Scheduled Task,T1053.005,1,1,5,NA
-OS Credential Dumping: Security Account Manager,T1003.002,1,1,5,NA
-Create Account: Local Account,T1136.001,8,1,5,NA
+Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder,T1547.001,1,0,5,NA
+Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder,T1547.001,3,0,5,NA
+Scheduled Task/Job: Scheduled Task,T1053.005,1,0,5,NA
+OS Credential Dumping: Security Account Manager,T1003.002,1,0,5,NA
+Create Account: Local Account,T1136.001,8,0,5,NA
 Hide Artifacts: Hidden Files and Directories,T1564.004,2,0,5,NA
-Indicator Removal on Host: Clear Windows Event Logs,T1070.001,1,1,5,NA
+Indicator Removal on Host: Clear Windows Event Logs,T1070.001,1,0,5,NA
 Indicator Removal on Host: Clear Persistence,T1070.003,12,0,5,NA
 Unsecured Credentials: Credentials In Files,T1552.001,4,0,5,NA
-OS Credential Dumping: LSASS Memory,T1003.001,1,1,5,NA
-Remote Services: Windows Remote Management,T1021.006,1,1,5,NA
+OS Credential Dumping: LSASS Memory,T1003.001,1,0,5,NA
+Remote Services: Windows Remote Management,T1021.006,1,0,5,NA
 Use Alternate Authentication Material: Pass the Hash,T1550.002,1,0,5,NA
 OS Credential Dumping: DCSync,T1003.006,1,0,5,NA
 Exfiltration Over Command and Control Channel,T1041,1,0,5,NA
@@ -32,6 +32,6 @@ Data Encrypted for Impact,T1486,11,0,5,NA
 Brute Force: Password Spraying,T1110.003,6,0,5,NA
 Account Discovery: Domain Account,T1087.002,16,0,5,NA
 Exfiltration Over Web Service: Exfiltration to Cloud Storage,T1567.002,1,0,5,NA
-Impair Defenses: Disable or Modify Tools,T1562.001,16,1,5,NA
-Impair Defenses: Disable or Modify Tools,T1562.001,18,1,5,NA
+Impair Defenses: Disable or Modify Tools,T1562.001,16,0,5,NA
+Impair Defenses: Disable or Modify Tools,T1562.001,18,0,5,NA
 Command and Scripting Interpreter: PowerShell over DNS,T1059.001,24,0,5,NA
