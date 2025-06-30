@@ -57,8 +57,6 @@ atomic_tests:
       .\rclone.exe config delete #{remote_share}:
       Remove-Item #{rclone_config_path}\rclone -recurse -force -erroraction silentlycontinue
       cd c:\
-      Remove-Item "PathToAtomicsFolder\..\ExternalPayloads\rclone.zip"
-      Remove-Item "PathToAtomicsFolder\..\ExternalPayloads\T1567.002" -recurse -force
     name: powershell
     elevation_required: false
 - name: Exfiltrate data with rclone to cloud Storage - AWS S3
