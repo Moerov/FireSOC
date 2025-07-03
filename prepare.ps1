@@ -29,7 +29,7 @@ Read-Host -Prompt "Press any key to continue after whitelisting"
 $zipUrl = "https://github.com/Moerov/FireSOC/archive/refs/heads/main.zip"
 $zipPath = Join-Path $targetPath "FireSOC-main.zip"
 Write-Host "Downloading FireSOC-main.zip..."
-curl.exe -L $zipUrl -o $zipPath
+Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath -UseDefaultCredentials
 
 # ─── STEP 4: Extract FireSOC ────────────────────────────────────────────────────
 $tempExtractPath = Join-Path $targetPath "TempExtract"
@@ -51,7 +51,7 @@ $sevenZipExePath = Join-Path $targetPath "7za.exe"
 
 if (-Not (Test-Path $sevenZipExePath)) {
     Write-Host "Downloading 7za.zip..."
-    curl.exe -L $sevenZipUrl -o $sevenZipZipPath
+    Invoke-WebRequest -Uri $sevenZipUrl -OutFile $sevenZipZipPath -UseDefaultCredentials
     Expand-Archive -Path $sevenZipZipPath -DestinationPath $targetPath -Force
     Remove-Item -Path $sevenZipZipPath -Force
 }
@@ -78,6 +78,7 @@ if (Test-Path $extZip) {
 } else {
     Write-Warning "ExternalPayloads.zip not found!"
 }
+
 # ─── STEP 7: Cleanup ──────────────────────────────────────────────────────────────
 $filesToDelete = @("readme.txt", "license.txt", "7-zip.chm", "7za.exe")
 

@@ -10,13 +10,13 @@
     "subnet": "change_me",
     "destination_url": "click-boom.site:4242",
     "pua_url": "https://raw.githubusercontent.com/Moerov/FireSOC/main/utils/edge_update.exe",
-    "host_to_scan_portable": "change_me",
-    "password_local": "change_me",
+    "host_to_scan_portable": "change_me_to_DC_IP",
+    "password_local": "change_me_to_random_string",
     "user_limit": 10,
     "password_spray": "Sommer2025!",
-    "Domain": "to_change",
-    "DomainController": "to_change",
-    "mega_user_account": "change@me",
-    "mega_user_password": "to_change"
+    "Domain": "change_me",
+    "DomainController": "change_me_to_DC_IP",
+    "mega_user_account": "change_me",
+    "mega_user_password": "change_me"
   }
 }
