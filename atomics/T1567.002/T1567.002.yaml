@@ -50,7 +50,7 @@ atomic_tests:
       cd "#{rclone_path}"
       .\rclone.exe config create #{remote_share} mega
       set-Content #{rclone_config_path}\rclone\rclone.conf "[#{remote_share}] `n type = mega `n user = #{mega_user_account} `n pass = #{mega_user_password}"
-      .\rclone.exe copy --max-size 1700k "#{dir_to_copy}" #{remote_share}:test -v
+      .\rclone.exe copy "#{dir_to_copy}" #{remote_share}:test -v
     cleanup_command: |
       cd "#{rclone_path}"
       .\rclone.exe purge #{remote_share}:test

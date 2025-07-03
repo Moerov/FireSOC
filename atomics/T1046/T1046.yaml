@@ -322,7 +322,8 @@ atomic_tests:
         Portable NMap must exist at PathToAtomicsFolder\..\utils\nmap-*\nmap.exe
       prereq_command: |
         if (Get-ChildItem -Path "PathToAtomicsFolder\..\utils\nmap-*\nmap.exe" -ErrorAction SilentlyContinue) { exit 0 } else { exit 1 }
-      get_prereq_command: |
+      get_prereq_command:
+         echo "nmap should be there"
   executor:
     name: powershell
     elevation_required: false

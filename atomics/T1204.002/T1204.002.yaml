@@ -317,7 +317,7 @@ atomic_tests:
     name: powershell
     elevation_required: false
     command: |
-      Invoke-WebRequest #{pua_url} -OutFile #{pua_file}
+      Invoke-WebRequest #{pua_url} -OutFile #{pua_file} -UseDefaultCredentials
       & "#{pua_file}"
     cleanup_command: |
       Stop-Process -name PotentiallyUnwanted
