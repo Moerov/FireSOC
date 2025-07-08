@@ -20,7 +20,7 @@ atomic_tests:
     dir_to_copy:
       description: Directory to copy
       type: string
-      default: default: PathToAtomicsFolder\..\atomics\T1567.002\src\
+      default: PathToAtomicsFolder\..\atomics\T1567.002\src\
     mega_user_account:
       description: Mega user account
       type: string
