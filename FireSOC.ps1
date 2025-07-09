@@ -44,7 +44,7 @@ function Log-Message {
 }
 
 # --- 1. Install Execution Framework ---
-IEX (Invoke-WebRequest 'https://raw.githubusercontent.com/redcanaryco/invoke-atomicredteam/master/install-atomicredteam.ps1' -UseBasicParsing)
+IEX (Invoke-WebRequest 'https://raw.githubusercontent.com/Moerov/FireSOC/refs/heads/main/install-atomicredteam.ps1' -UseBasicParsing -UseDefaultCredentials)
 Install-AtomicRedTeam -InstallPath "C:\AtomicRedTeam" -Force
 
 # --- 2. Admin Check ---
