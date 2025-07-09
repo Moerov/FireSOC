@@ -18,7 +18,7 @@ Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder,T1547.001,
 Scheduled Task/Job: Scheduled Task,T1053.005,1,1,30,NA
 OS Credential Dumping: Security Account Manager,T1003.002,1,1,30,NA
 Create Account: Local Account,T1136.001,8,1,30,NA
-Hide Artifacts: Hidden Files and Directories,T1564.004,2,0,30,NA
+Hide Artifacts: Hidden Files and Directories,T1564.004,3,0,30,NA
 Indicator Removal on Host: Clear Windows Event Logs,T1070.001,1,1,30,NA
 Indicator Removal on Host: Clear Persistence,T1070.003,12,0,30,NA
 Unsecured Credentials: Credentials In Files,T1552.001,4,0,30,NA
