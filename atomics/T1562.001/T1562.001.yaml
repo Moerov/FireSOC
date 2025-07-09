@@ -337,11 +337,6 @@ atomic_tests:
       Set-MpPreference -DisableBehaviorMonitoring 1
       Set-MpPreference -DisableScriptScanning 1
       Set-MpPreference -DisableBlockAtFirstSeen 1
-    cleanup_command: |
-      Set-MpPreference -DisableRealtimeMonitoring 0
-      Set-MpPreference -DisableBehaviorMonitoring 0
-      Set-MpPreference -DisableScriptScanning 0
-      Set-MpPreference -DisableBlockAtFirstSeen 0
     name: powershell
     elevation_required: true
 - name: Tamper with Windows Defender Command Prompt
@@ -372,8 +367,6 @@ atomic_tests:
   executor:
     command: |
       Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name DisableAntiSpyware -Value 1
-    cleanup_command: |
-      Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name DisableAntiSpyware -Value 0
     name: powershell
     elevation_required: true
 - name: Disable Microsoft Office Security Features
