@@ -3,10 +3,9 @@ Command and Scripting Interpreter: PowerShell (Mimikatz),T1059.001,1,0,30,NA
 Command and Scripting Interpreter: PowerShell (Custom),T1059.001,23,0,30,NA
 User Execution: Malicious File,T1204.002,8,0,30,NA
 Signed Binary Proxy Execution: Mshta,T1218.005,1,0,30,NA
-Signed Binary Proxy Execution: Compiled HTML File,T1218.001,2,0,30,NA
 Ingress Tool Transfer,T1105,7,0,30,NA
 Ingress Tool Transfer,T1105,18,0,30,NA
-Command and Scripting Interpreter: PowerShell,T1059.001,24,0,30,NA
+Command and Scripting Interpreter: PowerShell over DNS,T1059.001,24,0,30,NA
 Permission Groups Discovery: Domain Groups,T1069.002,8,0,30,NA
 Steal or Forge Kerberos Tickets: Kerberoasting,T1558.003,2,0,30,NA
 Command and Scripting Interpreter: PowerShell,T1059.001,2,0,30,NA
@@ -34,4 +33,3 @@ Account Discovery: Domain Account,T1087.002,16,0,30,NA
 Exfiltration Over Web Service: Exfiltration to Cloud Storage,T1567.002,1,0,30,NA
 Impair Defenses: Disable or Modify Tools,T1562.001,16,1,30,NA
 Impair Defenses: Disable or Modify Tools,T1562.001,18,1,30,NA
-Command and Scripting Interpreter: PowerShell over DNS,T1059.001,24,0,30,NA
