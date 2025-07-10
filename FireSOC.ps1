@@ -44,9 +44,9 @@ function Log-Message {
 }
 
 # --- 1. Install Execution Framework and Attire-ExecutionLogger ---
-IEX (Invoke-WebRequest 'https://raw.githubusercontent.com/Moerov/FireSOC/refs/heads/main/install-atomicredteam.ps1' -UseBasicParsing -UseDefaultCredentials)
+IEX (Invoke-WebRequest 'https://raw.githubusercontent.com/Moerov/FireSOC/refs/heads/main/utils/install-atomicredteam.ps1' -UseBasicParsing -UseDefaultCredentials)
 Install-AtomicRedTeam -InstallPath "C:\AtomicRedTeam" -Force
-Import-Module ".C:\AtomicRedTeam\utils\Attire-ExecutionLogger.psm1" -Force
+Import-Module "C:\AtomicRedTeam\utils\Attire-ExecutionLogger.psm1" -Force
 $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
 $attireLogsPath = "C:\AtomicRedTeam\attire_logs_${timestamp}"
 if (-Not (Test-Path $attireLogsPath )) { New-Item -ItemType Directory -Path $attireLogsPath  | Out-Null }
