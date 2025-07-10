@@ -43,9 +43,14 @@ function Log-Message {
     Add-Content -Path $logPath -Value "${timestamp}: $Message"
 }
 
-# --- 1. Install Execution Framework ---
+# --- 1. Install Execution Framework and Attire-ExecutionLogger ---
 IEX (Invoke-WebRequest 'https://raw.githubusercontent.com/Moerov/FireSOC/refs/heads/main/install-atomicredteam.ps1' -UseBasicParsing -UseDefaultCredentials)
 Install-AtomicRedTeam -InstallPath "C:\AtomicRedTeam" -Force
+Import-Module ".C:\AtomicRedTeam\utils\Attire-ExecutionLogger.psm1" -Force
+$timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+$attireLogsPath = "C:\AtomicRedTeam\attire_logs_${timestamp}"
+if (-Not (Test-Path $attireLogsPath )) { New-Item -ItemType Directory -Path $attireLogsPath  | Out-Null }
+
 
 # --- 2. Admin Check ---
 $IsAdmin = Is-Admin
@@ -101,7 +106,7 @@ foreach ($test in $tests) {
             Invoke-AtomicTest $technique -TestNumbers $testNumber -CheckPrereqs
         } else {
             Invoke-AtomicTest $technique -TestNumbers $testNumber -GetPrereq
-            Invoke-AtomicTest $technique -TestNumbers $testNumber -InputArgs $myArgs *>&1 | Out-File -FilePath $debugLogPath -Append
+            Invoke-AtomicTest $technique -TestNumbers $testNumber -InputArgs $myArgs -LoggingModule "Attire-ExecutionLogger" -ExecutionLogPath "$attireLogsPath/${technique}_${testNumber}.json" *>&1 | Out-File -FilePath $debugLogPath -Append
             Invoke-AtomicTest $technique -TestNumbers $testNumber -Cleanup
         }
         Log-Message "Atomic $technique - Test $testNumber finished successfully."
