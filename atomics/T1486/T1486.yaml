@@ -360,3 +360,17 @@ atomic_tests:
     cleanup_command: |
       Remove-Item -Path "C:\RansomwareTest" -Recurse -Force -ErrorAction SilentlyContinue
       Remove-Item -Path "$env:USERPROFILE\Desktop\RANSOM_NOTE_SIMULATION.txt" -Force -ErrorAction SilentlyContinue
+- name: Simulated Ransomware Activity via PowerShell using quickbuck from Nextron Systems (No Encryption)
+  auto_generated_guid: d7c92b86-bc7b-4a9b-a445-f1f3f2a8e9e1
+  description: |
+    This test simulates ransomware behavior by calling the modified version of quickbuck.exe (ransomware simulator from https://github.com/NextronSystems/ransomware-simulator). 
+  supported_platforms:
+  - windows
+  executor:
+    name: cmd
+    elevation_required: false
+    command: |
+      PathToAtomicsFolder\..\utils\quickbuck.exe run --dir "C:\AtomicRedTeam\Ransomware_test_encrypted_files"
+    cleanup_command: |
+      Remove-Item -Path "C:\AtomicRedTeam\Ransomware_test_encrypted_files" -Recurse -Force -ErrorAction SilentlyContinue
+      Remove-Item -Path "$env:USERPROFILE\Desktop\ransomware-simulator-note.txt" -Force -ErrorAction SilentlyContinue
