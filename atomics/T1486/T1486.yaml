@@ -367,7 +367,7 @@ atomic_tests:
   supported_platforms:
   - windows
   executor:
-    name: cmd
+    name: command_prompt
     elevation_required: false
     command: |
       PathToAtomicsFolder\..\utils\quickbuck.exe run --dir "C:\AtomicRedTeam\Ransomware_test_encrypted_files"
