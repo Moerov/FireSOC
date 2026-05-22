@@ -502,7 +502,7 @@ atomic_tests:
   description: |
     Simulates retrieving a Base64-encoded PowerShell command from a DNS TXT record and executing it.
     This technique avoids IEX and Invoke-WebRequest by leveraging DNS queries via nslookup.
-    The DNS record (cmd.click-boom.site) returns a simple "simulation" script encoded in Base64.
+    The DNS record (cmd.deadclick.site) returns a simple "simulation" script encoded in Base64.
     Inspired by red team tradecraft.
   supported_platforms:
     - windows
@@ -510,7 +510,7 @@ atomic_tests:
     dns_domain:
       description: Domain hosting the Base64-encoded command in a TXT record
       type: string
-      default: cmd.click-boom.site
+      default: cmd.deadclick.site
     dns_server:
       description: DNS server to query
       type: string
